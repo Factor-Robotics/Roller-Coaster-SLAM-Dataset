@@ -20,4 +20,31 @@ Roller coasters can be considered as an ideal platform for SLAM (Simultaneous Lo
 By utilizing roller coasters as a testbed for SLAM research, scientists and engineers can develop more robust algorithms that improve navigation systems in various real-world scenarios beyond amusement parks.
 
 ## How to collect data and contribute?
-TODO
+The difference between SLAM data sequences and many roller coaster POV videos on the Internet lies in the following aspects:
+
+1. Sensor intrinsics and extrinsics need to be provided.
+2. IMU data is required in most cases.
+3. Cameras typically use a global shutter.
+4. Data from different sensors needs to be synchronized.
+
+The instructions below are mainly about camera devices, as they are generally allowed in amusement parks. We currently have no experience or cases of installing LiDAR on roller coasters. Perhaps some small 3D reconstruction device equipped with LiDAR is feasible. If you can get advanced access to the roller coaster, then everything is possible.
+
+### Available Devices
+#### GoPro and other action cameras
+New GoPro models all come with IMU, and some also have GPS. Its data can be converted into a ROS bag using tools such as [gopro_ros](https://github.com/AutonomousFieldRoboticsLab/gopro_ros). Other tools may be useful for sensor calibration, such as [OpenICC](https://github.com/urbste/OpenImuCameraCalibrator).
+
+#### OAK and other stereo cameras
+Many stereo cameras used in robots are also small and have intergrated IMUs. Most of them are already calibrated at the factory. But they usually don't have built-in batteries and storage. Therefore you need other devices for power supply and data recording, such as a mobile phone or UMPC (Ultra-Mobile Personal Computer). The most important thing is to organize the cable and keep yourself and your devices safe during the ride.
+
+### Mounting Accessories
+Holding the device directly with your hands is not recommended. You need some accessories to mount the device securely. You can find a variety of action camera accessories for different mounting methods. Commonly considered mounting positions include head, chest, and wrist, depending on the shape of the vehicle and restrains. Some amusement parks will display the vehicle next to the project. This is helpful because you can comfirm in advance whether the mounting method is suitable.
+
+### Data Format
+It is recommended to share data in the form of ROS bags. Because it can record time series data from various types of sensors and has good specifications. Sensor intrinsics and extrinsics can be recorded in tf and sensor_msgs/CameraInfo without extra provision. We recommend following relevant REPs (ROS Enhancement Proposals) to avoid causing trouble to users, including:
+* [REP-104](https://ros.org/reps/rep-0104.html) CameraInfo updates for Diamondback
+* [REP-105](https://ros.org/reps/rep-0105.html) Coordinate Frames for Mobile Platforms
+* [REP-117](https://ros.org/reps/rep-0117.html) Informational Distance Measurements
+* [REP-118](https://ros.org/reps/rep-0118.html) Depth Images
+* [REP-145](https://ros.org/reps/rep-0145.html) Conventions for IMU Sensor Drivers
+
+It is best to also attach the project’s official webpage or introduction, if available. There will generally be information such as manufacturer, height, length, maximum speed, etc., which can also provide a useful reference. When this project collects more sequences, we will consider organizing them according to geographical location. So that everyone can find local projects for more diverse records and repeated tests.
